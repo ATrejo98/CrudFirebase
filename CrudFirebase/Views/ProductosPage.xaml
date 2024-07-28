@@ -18,6 +18,7 @@
                        CornerRadius="100"  
                        WidthRequest="170"
                        HeightRequest="170"
+                       BackgroundColor="#DCA47C"
                        AbsoluteLayout.LayoutBounds="0.5, 0, 175, 150"
                        AbsoluteLayout.LayoutFlags="PositionProportional">
                     <Frame CornerRadius="85"

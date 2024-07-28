@@ -63,10 +63,45 @@ namespace CrudFirebase.ViewModels
 
         private async Task AddProducto()
         {
-            
-            await _firebaseService.AddProducto(NuevoProducto);
-            await LoadProductos();
-            LimpiarCampos(); // Llamada al mtodo para limpiar los campos
+            // Acumular mensajes de error para campos vacíos
+            var errores = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(NuevoProducto.Nombre))
+            {
+                errores.Add("El campo 'Nombre' está vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(NuevoProducto.Descripcion))
+            {
+                errores.Add("El campo 'Descripción' está vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(NuevoProducto.Precio))
+            {
+                errores.Add("El campo 'Precio' está vacío.");
+            }
+
+            if (string.IsNullOrWhiteSpace(NuevoProducto.FotoBase64))
+            {
+                errores.Add("El campo 'Fotografía' está vacío.");
+            }
+
+            // Si hay errores, mostrar alerta y retornar
+            if (errores.Any())
+            {
+                var mensaje = string.Join("\n", errores);
+                await Application.Current.MainPage.DisplayAlert("Error", mensaje, "OK");
+                return;
+            }
+
+            // Confirmación de adición
+            bool isConfirmed = await Application.Current.MainPage.DisplayAlert("Confirmar adición", "¿Estás seguro de que deseas añadir este producto?", "Sí", "No");
+            if (isConfirmed)
+            {
+                await _firebaseService.AddProducto(NuevoProducto);
+                await LoadProductos();
+                LimpiarCampos(); // Llamada al método para limpiar los campos
+            }
         }
 
         private async Task UpdateProducto(productosModel producto)

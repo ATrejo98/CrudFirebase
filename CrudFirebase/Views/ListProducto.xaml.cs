@@ -8,7 +8,7 @@ public partial class ListProducto : ContentPage
     public ListProducto()
     {
         InitializeComponent();
-        BindingContext = new ProductosViewModel(); // Asegúrate de que el ViewModel está establecido como BindingContext
+        BindingContext = new ProductosViewModel();
     }
 
     private async void OnDeleteProducto(object sender, EventArgs e)
@@ -18,10 +18,14 @@ public partial class ListProducto : ContentPage
 
         if (producto != null)
         {
-            var viewModel = BindingContext as ProductosViewModel;
-            if (viewModel != null)
+            bool isConfirmed = await DisplayAlert("Confirmar eliminación", "¿Estás seguro de que deseas eliminar este producto?", "Sí", "No");
+            if (isConfirmed)
             {
-                viewModel.DeleteProductoCommand.Execute(producto.Id);
+                var viewModel = BindingContext as ProductosViewModel;
+                if (viewModel != null)
+                {
+                    viewModel.DeleteProductoCommand.Execute(producto.Id);
+                }
             }
         }
     }
@@ -33,9 +37,11 @@ public partial class ListProducto : ContentPage
 
         if (producto != null)
         {
-            await Navigation.PushAsync(new UpdateProducto(producto));
+            bool isConfirmed = await DisplayAlert("Confirmar modificación", "¿Estás seguro de que deseas modificar este producto?", "Sí", "No");
+            if (isConfirmed)
+            {
+                await Navigation.PushAsync(new UpdateProducto(producto));
+            }
         }
     }
-
-
 }

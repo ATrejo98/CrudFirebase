@@ -63,8 +63,6 @@ namespace CrudFirebase.Views
                     return;
                 }
 
-                var photoUri = photo.FullPath;
-
                 using (var stream = await photo.OpenReadAsync())
                 using (var memoryStream = new MemoryStream())
                 {
@@ -105,8 +103,6 @@ namespace CrudFirebase.Views
                     return;
                 }
 
-                var photoUri = photo.FullPath;
-
                 using (var stream = await photo.OpenReadAsync())
                 using (var memoryStream = new MemoryStream())
                 {
@@ -135,5 +131,6 @@ namespace CrudFirebase.Views
                 await DisplayAlert("Error", "Ocurrió un error al intentar seleccionar la foto.", "OK");
             }
         }
+
     }
 }

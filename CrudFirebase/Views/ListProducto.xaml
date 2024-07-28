@@ -29,18 +29,18 @@
                             <SwipeView.RightItems>
                                 <SwipeItems>
                                     <SwipeItem Text="Eliminar"
-                                               BackgroundColor="Red"
+                                               BackgroundColor="#FA7070"
                                                CommandParameter="{Binding .}"
                                                Invoked="OnDeleteProducto" />
                                     <SwipeItem Text="Modificar"
-                                               BackgroundColor="Blue"
+                                               BackgroundColor="#698474"
                                                CommandParameter="{Binding .}" 
                                                Invoked="OnModifyProducto" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Frame Padding="10"
                                    Margin="10"
-                                   BorderColor="#7bbda1"
+                                   BorderColor="#DCA47C"
                                    HasShadow="True"
                                    CornerRadius="10"
                                    BackgroundColor="White">
