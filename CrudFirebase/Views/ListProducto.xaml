@@ -2,20 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CrudFirebase.ViewModels"
-             
-              xmlns:converters="clr-namespace:CrudFirebase.Controllers"
-             
+             xmlns:converters="clr-namespace:CrudFirebase.Controllers"
              x:Class="CrudFirebase.Views.ListProducto"
              Title="Lista de Productos">
-
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:Base64ToImageSourceConverter x:Key="Base64ToImageSourceConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    
+
     <ContentPage.BindingContext>
         <local:ListProductoViewModel />
     </ContentPage.BindingContext>
@@ -23,47 +19,61 @@
     <ContentPage.Content>
         <Grid RowDefinitions="Auto, *">
             <!-- Lista de productos -->
-            <CollectionView Grid.Row="1"
-                            ItemsSource="{Binding ProductosFiltrados}"
+            <CollectionView x:Name="collectionView"
+                            Grid.Row="1"
+                            ItemsSource="{Binding Productos}"
                             SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="10"
-                               Margin="10"
-                               BorderColor="#7bbda1"
-                               HasShadow="True"
-                               CornerRadius="10"
-                               BackgroundColor="White">
-                            <StackLayout Orientation="Horizontal"
-                                         Spacing="10">
-                                <!-- Imagen del producto -->
-                                <Frame WidthRequest="60"
-                                       HeightRequest="60"
-                                       CornerRadius="30"
-                                       Padding="0"
-                                       IsClippedToBounds="True"
-                                       BorderColor="#7bbda1"
-                                       HasShadow="True">
-                                    <Image Source="{Binding FotoBase64, Converter={StaticResource Base64ToImageSourceConverter}}"
-                                           Aspect="AspectFill"
-                                           WidthRequest="60"
-                                           HeightRequest="60" />
-                                </Frame>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Eliminar"
+                                               BackgroundColor="Red"
+                                               CommandParameter="{Binding .}"
+                                               Invoked="OnDeleteProducto" />
+                                    <SwipeItem Text="Modificar"
+                                               BackgroundColor="Blue"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Frame Padding="10"
+                                   Margin="10"
+                                   BorderColor="#7bbda1"
+                                   HasShadow="True"
+                                   CornerRadius="10"
+                                   BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="10">
+                                    <!-- Imagen del producto -->
+                                    <Frame WidthRequest="60"
+                                           HeightRequest="60"
+                                           CornerRadius="30"
+                                           Padding="0"
+                                           IsClippedToBounds="True"
+                                           BorderColor="#7bbda1"
+                                           HasShadow="True">
+                                        <Image Source="{Binding FotoBase64, Converter={StaticResource Base64ToImageSourceConverter}}"
+                                               Aspect="AspectFill"
+                                               WidthRequest="60"
+                                               HeightRequest="60" />
+                                    </Frame>
 
-                                <!-- Datos del producto -->
-                                <StackLayout>
-                                    <Label Text="{Binding Nombre}"
-                                           FontAttributes="Bold"
-                                           FontSize="Medium" />
-                                    <Label Text="{Binding Descripcion}"
-                                           FontSize="Small"
-                                           TextColor="Gray" />
-                                    <Label Text="{Binding Precio}"
-                                           FontSize="Small"
-                                           TextColor="Green" />
+                                    <!-- Datos del producto -->
+                                    <StackLayout>
+                                        <Label Text="{Binding Nombre}"
+                                               FontAttributes="Bold"
+                                               FontSize="Medium" />
+                                        <Label Text="{Binding Descripcion}"
+                                               FontSize="Small"
+                                               TextColor="Gray" />
+                                        <Label Text="{Binding Precio}"
+                                               FontSize="Small"
+                                               TextColor="Green" />
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                        </Frame>
+                            </Frame>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
