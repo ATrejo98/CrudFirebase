@@ -7,8 +7,9 @@
     Shell.FlyoutBehavior="Disabled"
     Title="CrudFirebase">
 
+    
     <ShellContent
-        Title="Home"
+        Title="Agregar Producto"
         ContentTemplate="{DataTemplate local:ProductosPage}"
         Route="ProductosPage" />
 

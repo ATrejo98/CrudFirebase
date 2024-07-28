@@ -11,7 +11,7 @@ namespace CrudFirebase.Models
         public string Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public decimal Precio { get; set; }
-        public string Foto { get; set; }
+        public string Precio { get; set; }
+        public string FotoBase64 { get; set; }
     }
 }

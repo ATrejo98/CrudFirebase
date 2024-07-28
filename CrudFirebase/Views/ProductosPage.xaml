@@ -8,103 +8,90 @@
         <local:ProductosViewModel />
     </ContentPage.BindingContext>
 
-
     <ContentPage.Content>
-
         <Grid RowDefinitions="Auto,*,Auto">
-
-
-            <Frame Grid.Row="0"
-                   Padding="0"
-                   Margin="0,0,0,0"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   CornerRadius="100"
-                   BackgroundColor="#7bbda1">
-                <StackLayout Spacing="10"
-                             Margin="15"
-                             HorizontalOptions="Center"
-                             VerticalOptions="Start">
-                    <Frame CornerRadius="100"
-                           BackgroundColor="White"
-                           Padding="0">
-                        <Image 
-                            Source="zelda.png"
-                            x:Name="img"
-                               WidthRequest="160"
-                               HeightRequest="160"
-                               HorizontalOptions="CenterAndExpand"
-                               VerticalOptions="CenterAndExpand">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
-                            </Image.GestureRecognizers>
+            <AbsoluteLayout Grid.Row="0" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Start"
+                            Margin="12">
+                <Frame 
+                       CornerRadius="100"  
+                       WidthRequest="170"
+                       HeightRequest="170"
+                       AbsoluteLayout.LayoutBounds="0.5, 0, 175, 150"
+                       AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Frame CornerRadius="85"
+                           BackgroundColor="#FCF8F3"
+                           Padding="0"
+                            WidthRequest="160"
+                            HeightRequest="160"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand">
+                        <Image Source="{Binding UriFoto}"
+                               x:Name="img"
+                               Aspect="AspectFit">
                         </Image>
                     </Frame>
- 
-                </StackLayout>
-            </Frame>
+                </Frame>
+
+                <ImageButton Source="camera24x24.svg"
+                             BackgroundColor="#FFD3B6"
+                             Command="{Binding CamaraCommand}"
+                             WidthRequest="45"
+                             HeightRequest="45"
+                             CornerRadius="50"
+                             Padding="10"
+                             AbsoluteLayout.LayoutBounds="1, 1, 45, 45"
+                             AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnfoto_Clicked" NumberOfTapsRequired="1"/>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
 
 
-            <ScrollView Grid.Row="1"
-                        Padding="30"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                <StackLayout>
-                    <Label Text="Nombre:" />
-                    <Frame Padding="0" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
-                        <Entry Text="{Binding NuevoProducto.Nombre}" Placeholder="Ingrese el nombre" Margin="15,5" />
-                    </Frame>
 
-                    <Label Text="Descripción:" />
-                    <Frame Padding="0, 0, 0, 75" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
-                        <Entry Text="{Binding NuevoProducto.Descripcion}" Placeholder="Ingrese la descripción" Margin="15,5" />
-                    </Frame>
-                    
-                    <Label Text="Precio:" />
-                    <Frame Padding="0" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
-                        <Entry Text="{Binding NuevoProducto.Precio}" Placeholder="Ingrese el precio" Keyboard="Numeric" Margin="15,5" />
-                    </Frame>
-                </StackLayout>
+            </AbsoluteLayout>
+
+            <!-- FORMULARIO -->
+            <ScrollView Grid.Row="1" Padding="30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="5" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                        <Label Text="Nombre:" />
+                        <Frame Padding="0" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding NuevoProducto.Nombre}" Placeholder="Ingrese el nombre" Margin="15,5" />
+                        </Frame>
+
+                        <Label Text="Descripción:"/>
+                        <Frame Padding="0, 0, 0, 75" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding NuevoProducto.Descripcion}" Placeholder="Ingrese la descripción" Margin="15,5" />
+                        </Frame>
+
+                        <Label Text="Precio:" />
+                        <Frame Padding="0" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding NuevoProducto.Precio}" Placeholder="Ingrese el precio" Keyboard="Numeric" Margin="15,5" />
+                        </Frame>
+                    </StackLayout>
+
+                    <!-- Boton flotante -->
+                    <AbsoluteLayout HorizontalOptions="End" VerticalOptions="End" Margin="260,350,0,0">
+                        <ImageButton Source="lista" Padding="15" WidthRequest="60" HeightRequest="60" CornerRadius="30" BackgroundColor="#FFD3B6" Clicked="NavigateToListPage" />
+                    </AbsoluteLayout>
+                </AbsoluteLayout>
             </ScrollView>
 
-
             <StackLayout Grid.Row="2"
-                        Spacing="10"
-                        Margin="30,20,30,20"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="End">
-                <Button 
-                    HorizontalOptions="FillAndExpand"
-                    Text="Agregar Producto"
-                    CornerRadius="100"
-                    TextColor="#ffffff"
-                    BackgroundColor="#7bbda1"
-                    FontAttributes="Bold"
-                    Command="{Binding AddProductoCommand}" />
+                         Spacing="10"
+                         Margin="30,20,30,20"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End">
+                <Button HorizontalOptions="FillAndExpand"
+                        Text="Agregar Producto"
+                        CornerRadius="100"
+                        TextColor="#ffffff"
+                        BackgroundColor="#DCA47C"
+                        FontAttributes="Bold"
+                        Command="{Binding AddProductoCommand}" />
             </StackLayout>
-
-            
         </Grid>
     </ContentPage.Content>
-    
-    
-    
-    
-    
-    
 </ContentPage>
-
-
-<!-- <ListView ItemsSource="{Binding Productos}" Margin="10">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Nombre}" FontSize="20" />
-                            <Label Text="{Binding Descripcion}" FontSize="16" />
-                            <Label Text="{Binding Precio, StringFormat='Precio: {0:C}'}" FontSize="16" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView> -->
