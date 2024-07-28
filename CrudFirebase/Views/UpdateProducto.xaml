@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CrudFirebase.ViewModels"
+             xmlns:converters="clr-namespace:CrudFirebase.Controllers"
+             x:Class="CrudFirebase.Views.UpdateProducto">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:Base64ToImageSourceConverter x:Key="Base64ToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,*,Auto">
+            <AbsoluteLayout Grid.Row="0" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Start"
+                            Margin="12">
+                <Frame 
+                       CornerRadius="100"  
+                       WidthRequest="170"
+                       HeightRequest="170"
+                       AbsoluteLayout.LayoutBounds="0.5, 0, 175, 150"
+                       AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Frame CornerRadius="85"
+                           BackgroundColor="#FCF8F3"
+                           Padding="0"
+                            WidthRequest="160"
+                            HeightRequest="160"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand">
+                        <Image Source="{Binding Producto.FotoBase64, Converter={StaticResource Base64ToImageSourceConverter}}"
+                               x:Name="img"
+                               Aspect="AspectFit">
+                        </Image>
+                    </Frame>
+                </Frame>
+
+                <ImageButton Source="camera24x24.svg"
+                             BackgroundColor="#FFD3B6"
+                             Command="{Binding CamaraCommand}"
+                             WidthRequest="45"
+                             HeightRequest="45"
+                             CornerRadius="50"
+                             Padding="10"
+                             AbsoluteLayout.LayoutBounds="1, 1, 45, 45"
+                             AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnfoto_Clicked" NumberOfTapsRequired="1"/>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+            </AbsoluteLayout>
+
+            <!-- FORMULARIO -->
+            <ScrollView Grid.Row="1" Padding="30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout Spacing="5" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                        <Label Text="Nombre:" />
+                        <Frame Padding="0" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding Producto.Nombre}" Placeholder="Ingrese el nombre" Margin="15,5" />
+                        </Frame>
+
+                        <Label Text="Descripción:"/>
+                        <Frame Padding="0, 0, 0, 75" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding Producto.Descripcion}" Placeholder="Ingrese la descripción" Margin="15,5" />
+                        </Frame>
+
+                        <Label Text="Precio:" />
+                        <Frame Padding="0" CornerRadius="10" BorderColor="#698474" HasShadow="False">
+                            <Entry Text="{Binding Producto.Precio}" Placeholder="Ingrese el precio" Keyboard="Numeric" Margin="15,5" />
+                        </Frame>
+                    </StackLayout>
+                </AbsoluteLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2"
+                         Spacing="10"
+                         Margin="30,20,30,20"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="End">
+                <Button HorizontalOptions="FillAndExpand"
+                        Text="Modificar Producto"
+                        CornerRadius="100"
+                        TextColor="#ffffff"
+                        BackgroundColor="Green"
+                        FontAttributes="Bold"
+                        Command="{Binding UpdateProductoCommand}" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

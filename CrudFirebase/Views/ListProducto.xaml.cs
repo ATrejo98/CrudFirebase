@@ -25,4 +25,17 @@ public partial class ListProducto : ContentPage
             }
         }
     }
+
+    private async void OnModifyProducto(object sender, EventArgs e)
+    {
+        var swipeItem = sender as SwipeItem;
+        var producto = swipeItem?.CommandParameter as productosModel;
+
+        if (producto != null)
+        {
+            await Navigation.PushAsync(new UpdateProducto(producto));
+        }
+    }
+
+
 }

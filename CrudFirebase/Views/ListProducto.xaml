@@ -34,7 +34,8 @@
                                                Invoked="OnDeleteProducto" />
                                     <SwipeItem Text="Modificar"
                                                BackgroundColor="Blue"
-                                               CommandParameter="{Binding .}" />
+                                               CommandParameter="{Binding .}" 
+                                               Invoked="OnModifyProducto" />
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <Frame Padding="10"
