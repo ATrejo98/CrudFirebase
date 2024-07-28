@@ -8,19 +8,94 @@
         <local:ProductosViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Padding="10">
-        <Label Text="Nombre:" />
-        <Entry Text="{Binding NuevoProducto.Nombre}" />
 
-        <Label Text="Descripción:" />
-        <Entry Text="{Binding NuevoProducto.Descripcion}" />
+    <ContentPage.Content>
 
-        <Label Text="Precio:" />
-        <Entry Text="{Binding NuevoProducto.Precio}" Keyboard="Numeric" />
+        <Grid RowDefinitions="Auto,*,Auto">
 
-        <Button Text="Agregar Producto" Command="{Binding AddProductoCommand}" />
 
-        <ListView ItemsSource="{Binding Productos}" Margin="10">
+            <Frame Grid.Row="0"
+                   Padding="0"
+                   Margin="0,0,0,0"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   CornerRadius="100"
+                   BackgroundColor="#7bbda1">
+                <StackLayout Spacing="10"
+                             Margin="15"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Start">
+                    <Frame CornerRadius="100"
+                           BackgroundColor="White"
+                           Padding="0">
+                        <Image 
+                            Source="zelda.png"
+                            x:Name="img"
+                               WidthRequest="160"
+                               HeightRequest="160"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+ 
+                </StackLayout>
+            </Frame>
+
+
+            <ScrollView Grid.Row="1"
+                        Padding="30"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="Nombre:" />
+                    <Frame Padding="0" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
+                        <Entry Text="{Binding NuevoProducto.Nombre}" Placeholder="Ingrese el nombre" Margin="15,5" />
+                    </Frame>
+
+                    <Label Text="Descripción:" />
+                    <Frame Padding="0, 0, 0, 75" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
+                        <Entry Text="{Binding NuevoProducto.Descripcion}" Placeholder="Ingrese la descripción" Margin="15,5" />
+                    </Frame>
+                    
+                    <Label Text="Precio:" />
+                    <Frame Padding="0" CornerRadius="10" BorderColor="#7bbda1" HasShadow="False">
+                        <Entry Text="{Binding NuevoProducto.Precio}" Placeholder="Ingrese el precio" Keyboard="Numeric" Margin="15,5" />
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+
+            <StackLayout Grid.Row="2"
+                        Spacing="10"
+                        Margin="30,20,30,20"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="End">
+                <Button 
+                    HorizontalOptions="FillAndExpand"
+                    Text="Agregar Producto"
+                    CornerRadius="100"
+                    TextColor="#ffffff"
+                    BackgroundColor="#7bbda1"
+                    FontAttributes="Bold"
+                    Command="{Binding AddProductoCommand}" />
+            </StackLayout>
+
+            
+        </Grid>
+    </ContentPage.Content>
+    
+    
+    
+    
+    
+    
+</ContentPage>
+
+
+<!-- <ListView ItemsSource="{Binding Productos}" Margin="10">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -32,6 +107,4 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
-</ContentPage>
+        </ListView> -->

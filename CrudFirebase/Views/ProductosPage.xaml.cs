@@ -10,5 +10,10 @@ namespace CrudFirebase.Views
             InitializeComponent();
             BindingContext = new ProductosViewModel();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+        {
+
+        }
     }
 }
